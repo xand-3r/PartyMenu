@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Mini Garage</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="design-system/index.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <!-- Стартовый экран: нет автомобиля -->
+      <section id="screen-welcome" class="screen screen--welcome hidden" aria-label="Добавление автомобиля">
+        <div class="screen-body screen-body--center">
+          <div class="ds-empty">
+            <div class="ds-empty__icon" aria-hidden="true">
+              <i class="ds-icon ds-icon--lg ri-car-fill"></i>
+            </div>
+            <h1 class="ds-empty__title">Добро пожаловать в Mini Garage!</h1>
+            <p class="ds-empty__text">Добавьте машину - и можно вести журнал обслуживания</p>
+            <div class="ds-empty__action">
+              <button
+                type="button"
+                id="btn-welcome-add"
+                class="ds-button"
+                data-variant="primary"
+                data-block="true"
+              >
+                <i class="ds-icon ds-icon--sm ri-add-circle-fill" aria-hidden="true"></i>
+                Добавить авто
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Форма добавления автомобиля -->
+      <section id="screen-add-car" class="screen screen--add-car hidden" aria-label="Добавление автомобиля">
+        <header class="ds-header" data-ds-header data-variant="back">
+          <button
+            type="button"
+            id="btn-add-car-back"
+            class="ds-header__lead ds-button"
+            data-variant="secondary-icon"
+            aria-label="Назад"
+          >
+            <i class="ds-icon ds-icon--sm ri-arrow-left-line" aria-hidden="true"></i>
+          </button>
+          <div class="ds-header__content">
+            <h1 class="ds-header__title">Добавление автомобиля</h1>
+            <p class="ds-header__subtitle">Заполните данные об автомобиле</p>
+          </div>
+        </header>
+
+        <main class="screen-body">
+          <form id="add-car-form">
+            <div class="ds-field" data-field="brand">
+              <label class="ds-label" for="field-brand">Марка</label>
+              <input
+                class="ds-input"
+                type="text"
+                id="field-brand"
+                name="brand"
+                placeholder="BMW"
+                autocomplete="organization"
+              />
+              <p class="ds-field-error" data-field-error hidden>Необходимо указать марку</p>
+            </div>
+
+            <div class="ds-field" data-field="model">
+              <label class="ds-label" for="field-model">Модель</label>
+              <input
+                class="ds-input"
+                type="text"
+                id="field-model"
+                name="model"
+                placeholder="X5"
+                autocomplete="off"
+              />
+              <p class="ds-field-error" data-field-error hidden>Необходимо указать модель</p>
+            </div>
+
+            <div class="ds-field" data-field="year">
+              <label class="ds-label" for="field-year">Год выпуска</label>
+              <input
+                class="ds-input"
+                type="number"
+                id="field-year"
+                name="year"
+                min="1950"
+                max="2099"
+                step="1"
+                placeholder="2020"
+                autocomplete="off"
+              />
+              <p class="ds-field-error" data-field-error hidden>Необходимо указать год выпуска</p>
+            </div>
+
+            <div class="ds-field" data-field="mileage">
+              <label class="ds-label" for="field-car-mileage">Текущий пробег</label>
+              <input
+                class="ds-input"
+                type="number"
+                id="field-car-mileage"
+                name="mileage"
+                min="0"
+                step="1"
+                placeholder="80 000"
+              />
+              <p class="ds-field-error" data-field-error hidden>Необходимо указать пробег</p>
+            </div>
+          </form>
+        </main>
+
+        <footer class="ds-screen-footer" data-ds-screen-footer data-label="Сохранить автомобиль">
+          <button
+            type="submit"
+            form="add-car-form"
+            class="ds-button"
+            data-variant="primary"
+            data-block="true"
+            data-ds-screen-footer-button
+          ></button>
+        </footer>
+      </section>
+
+      <!-- Журнал обслуживания -->
+      <section id="screen-journal" class="screen screen--journal hidden" aria-label="Журнал обслуживания">
+        <header class="ds-header" data-ds-header data-variant="avatar">
+          <div class="ds-header__lead" aria-hidden="true">
+            <i class="ds-icon ds-icon--lg ri-car-fill"></i>
+          </div>
+          <div class="ds-header__content">
+            <h1 class="ds-header__title">Журнал обслуживания</h1>
+            <p class="ds-header__subtitle" data-ds-header-subtitle id="header-vehicle">—</p>
+          </div>
+        </header>
+
+        <main class="main">
+          <div id="empty-state" class="ds-empty hidden">
+            <div class="ds-empty__icon" aria-hidden="true">
+              <i class="ds-icon ds-icon--lg ri-folder-5-fill"></i>
+            </div>
+            <h2 class="ds-empty__title">Пока нет записей</h2>
+            <p class="ds-empty__text">Добавьте первую запись об обслуживании</p>
+          </div>
+
+          <div id="log-list" class="ds-item-group" aria-live="polite"></div>
+        </main>
+
+        <footer class="ds-screen-footer" data-ds-screen-footer>
+          <button
+            type="button"
+            id="btn-add"
+            class="ds-button"
+            data-variant="primary"
+            data-block="true"
+            data-ds-screen-footer-button
+          >
+            <i class="ds-icon ds-icon--sm ri-add-circle-fill" aria-hidden="true"></i>
+            Добавить запись
+          </button>
+        </footer>
+      </section>
+
+      <!-- Форма добавления записи -->
+      <section id="screen-add-log" class="screen screen--add-log hidden" aria-label="Новая запись">
+        <header class="ds-header" data-ds-header data-variant="back">
+          <button
+            type="button"
+            id="btn-add-log-back"
+            class="ds-header__lead ds-button"
+            data-variant="secondary-icon"
+            aria-label="Назад"
+          >
+            <i class="ds-icon ds-icon--sm ri-arrow-left-line" aria-hidden="true"></i>
+          </button>
+          <div class="ds-header__content">
+            <h1 class="ds-header__title">Новая запись</h1>
+            <p class="ds-header__subtitle">Заполните данные об обслуживании</p>
+          </div>
+        </header>
+
+        <main class="screen-body">
+          <form id="add-form">
+            <div class="ds-field">
+              <label class="ds-label" for="field-date">Дата работ</label>
+              <div class="ds-input-group ds-date-input" data-ds-date-input>
+                <span class="ds-input-addon ds-input-addon--before" aria-hidden="true">
+                  <i class="ri-calendar-line"></i>
+                </span>
+                <div class="ds-date-input__field">
+                  <span class="ds-date-input__display" data-ds-date-display>дд.мм.гггг</span>
+                  <input
+                    class="ds-date-input__native"
+                    type="date"
+                    id="field-date"
+                    name="date"
+                    data-placeholder="дд.мм.гггг"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="ds-field">
+              <label class="ds-label" for="field-mileage">Пробег</label>
+              <input
+                class="ds-input"
+                type="number"
+                id="field-mileage"
+                name="mileage"
+                min="0"
+                step="1"
+                placeholder="80 000"
+                required
+              />
+            </div>
+
+            <div class="ds-field">
+              <label class="ds-label" for="field-cost">Сумма</label>
+              <input
+                class="ds-input"
+                type="number"
+                id="field-cost"
+                name="cost"
+                min="0"
+                step="0.01"
+                placeholder="120.00"
+                required
+              />
+            </div>
+
+            <div class="ds-field">
+              <label class="ds-label" for="field-works">Что было сделано</label>
+              <textarea
+                class="ds-input ds-input--textarea"
+                id="field-works"
+                name="works"
+                rows="4"
+                placeholder="Перечислите работы"
+                required
+              ></textarea>
+            </div>
+          </form>
+        </main>
+
+        <footer class="ds-screen-footer" data-ds-screen-footer data-label="Сохранить запись">
+          <button
+            type="submit"
+            form="add-form"
+            class="ds-button"
+            data-variant="primary"
+            data-block="true"
+            data-ds-screen-footer-button
+          ></button>
+        </footer>
+      </section>
+
+      <!-- Просмотр записи -->
+      <section id="screen-log-detail" class="screen screen--log-detail hidden" aria-label="Запись">
+        <header class="ds-header" data-ds-header data-variant="back">
+          <button
+            type="button"
+            id="btn-log-detail-back"
+            class="ds-header__lead ds-button"
+            data-variant="secondary-icon"
+            aria-label="Назад"
+          >
+            <i class="ds-icon ds-icon--sm ri-arrow-left-line" aria-hidden="true"></i>
+          </button>
+          <div class="ds-header__content">
+            <h1 class="ds-header__title" id="log-detail-title">Запись</h1>
+            <p class="ds-header__subtitle" id="log-detail-subtitle"></p>
+          </div>
+        </header>
+
+        <main class="screen-body">
+          <div class="ds-field">
+            <label class="ds-label" for="log-detail-date">Дата работ</label>
+            <div class="ds-input-group">
+              <span class="ds-input-addon ds-input-addon--before" aria-hidden="true">
+                <i class="ri-calendar-line"></i>
+              </span>
+              <output class="ds-input ds-input--readonly" id="log-detail-date" for=""></output>
+            </div>
+          </div>
+
+          <div class="ds-field">
+            <label class="ds-label" for="log-detail-mileage">Пробег</label>
+            <output class="ds-input ds-input--readonly" id="log-detail-mileage" for=""></output>
+          </div>
+
+          <div class="ds-field">
+            <label class="ds-label" for="log-detail-cost">Сумма</label>
+            <output class="ds-input ds-input--readonly" id="log-detail-cost" for=""></output>
+          </div>
+
+          <div class="ds-field">
+            <label class="ds-label" for="log-detail-works">Что было сделано</label>
+            <output class="ds-input ds-input--textarea ds-input--readonly" id="log-detail-works" for=""></output>
+          </div>
+        </main>
+      </section>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

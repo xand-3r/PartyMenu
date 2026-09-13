@@ -1,0 +1,69 @@
+﻿/* Button — component tokens (canonical) */
+.ds-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--component-button-padding);
+  border: none;
+  border-radius: var(--component-button-radius);
+  outline: none;
+  font-family: inherit;
+  font-size: var(--semantic-typography-label-font-size-md);
+  font-weight: var(--semantic-typography-label-font-weight);
+  line-height: var(--semantic-typography-label-line-height-md);
+  gap: var(--semantic-layout-gap-sm);
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease, box-shadow 150ms ease,
+    scale 150ms ease;
+}
+
+.ds-button[data-variant="primary"] {
+  background-color: var(--component-button-primary-surface-default);
+  color: var(--component-button-primary-content-default);
+}
+
+.ds-button[data-variant="primary"]:hover {
+  background-color: var(--component-button-primary-surface-hover);
+}
+
+.ds-button[data-variant="primary"]:focus-visible {
+  background-color: var(--component-button-primary-surface-focus);
+  box-shadow: 0 0 0 var(--semantic-effect-focus-ring-spread)
+    var(--semantic-effect-focus-ring-brand-base);
+}
+
+.ds-button[data-variant="secondary"],
+.ds-button[data-variant="secondary-icon"] {
+  background-color: var(--component-button-secondary-surface-default);
+  color: var(--component-button-secondary-content-default);
+}
+
+.ds-button[data-variant="secondary"]:hover,
+.ds-button[data-variant="secondary-icon"]:hover {
+  background-color: var(--component-button-secondary-surface-hover);
+  color: var(--component-button-secondary-content-hover);
+}
+
+.ds-button[data-variant="secondary"]:focus-visible,
+.ds-button[data-variant="secondary-icon"]:focus-visible {
+  background-color: var(--component-button-secondary-surface-focus);
+  box-shadow: 0 0 0 var(--semantic-effect-focus-ring-spread)
+    var(--semantic-effect-focus-ring-brand-base);
+}
+
+.ds-button[data-variant="secondary-icon"] {
+  gap: 0;
+}
+
+.ds-button[data-block="true"] {
+  width: 100%;
+}
+
+.ds-button:active {
+  scale: 0.98;
+}
+
+.ds-button:disabled {
+  opacity: calc(var(--semantic-effect-opacity-md) / 100);
+  pointer-events: none;
+}

@@ -1,0 +1,62 @@
+﻿.app {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--semantic-color-background-base);
+}
+
+.screen {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.screen.hidden {
+  display: none;
+}
+
+.screen-body {
+  flex: 1;
+  padding: var(--semantic-layout-padding-lg);
+  overflow-y: auto;
+}
+
+.screen-body--center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.screen--welcome .screen-body {
+  background: var(--semantic-color-surface-neutral-base);
+}
+
+.screen--journal,
+.screen--add-car,
+.screen--add-log,
+.screen--log-detail {
+  background: var(--semantic-color-background-base);
+}
+
+.screen--journal .main,
+.screen--add-car .screen-body,
+.screen--add-log .screen-body,
+.screen--log-detail .screen-body {
+  flex: 1;
+  padding: var(--semantic-layout-margin-xl);
+  overflow-y: auto;
+  background: var(--semantic-color-surface-neutral-base);
+  border-start-start-radius: var(--semantic-layout-radius-3xl);
+  border-start-end-radius: var(--semantic-layout-radius-3xl);
+}
+
+.main:has(#empty-state:not(.hidden)) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

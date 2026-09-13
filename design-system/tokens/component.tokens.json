@@ -1,0 +1,249 @@
+{
+  "component": {
+    "button": {
+      "primary": {
+        "surface": {
+          "default": {
+            "$type": "color",
+            "$value": "{semantic.color.surface.brand.base}",
+            "$description": "",
+            "$extensions": {
+              "mode": {}
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{semantic.color.surface.brand.bold}",
+            "$description": "",
+            "$extensions": {
+              "mode": {}
+            }
+          },
+          "focus": {
+            "$type": "color",
+            "$value": "{semantic.color.surface.brand.base}",
+            "$description": "",
+            "$extensions": {
+              "mode": {}
+            }
+          },
+          "disabled": {
+            "$type": "dimension",
+            "$value": "{semantic.effect.opacity.md}",
+            "$description": "",
+            "$extensions": {
+              "mode": {}
+            }
+          }
+        },
+        "content": {
+          "default": {
+            "$type": "color",
+            "$value": "{semantic.color.text.contrast.base}",
+            "$description": "",
+            "$extensions": {
+              "mode": {}
+            }
+          }
+        }
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{semantic.layout.padding.lg}",
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{semantic.layout.radius.md}",
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "secondary": {
+        "surface": {
+          "default": {
+            "$type": "color",
+            "$value": "{semantic.color.surface.neutral.subtle}",
+            "$description": "",
+            "$extensions": {
+              "mode": {}
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{semantic.color.surface.neutral.bold}",
+            "$description": "",
+            "$extensions": {
+              "mode": {}
+            }
+          },
+          "focus": {
+            "$type": "color",
+            "$value": "{semantic.color.surface.neutral.base}",
+            "$description": "",
+            "$extensions": {
+              "mode": {}
+            }
+          },
+          "disabled": {
+            "$type": "dimension",
+            "$value": "{semantic.effect.opacity.md}",
+            "$description": "",
+            "$extensions": {
+              "mode": {}
+            }
+          }
+        },
+        "content": {
+          "default": {
+            "$type": "color",
+            "$value": "{semantic.color.text.neutral.subtle}",
+            "$description": "",
+            "$extensions": {
+              "mode": {}
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{semantic.color.text.neutral.base}",
+            "$description": "",
+            "$extensions": {
+              "mode": {}
+            }
+          }
+        }
+      },
+      "ghost": {
+        "content": {
+          "default": {
+            "$type": "color",
+            "$value": "{semantic.color.text.neutral.subtle}",
+            "$description": "",
+            "$extensions": {
+              "mode": {}
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{semantic.color.text.neutral.base}",
+            "$description": "",
+            "$extensions": {
+              "mode": {}
+            }
+          },
+          "disabled": {
+            "$type": "dimension",
+            "$value": "{semantic.effect.opacity.md}",
+            "$description": "",
+            "$extensions": {
+              "mode": {}
+            }
+          }
+        }
+      }
+    },
+    "input": {
+      "padding": {
+        "$type": "dimension",
+        "$value": "{semantic.layout.padding.lg}",
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{semantic.layout.radius.md}",
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "border": {
+        "default": {
+          "$type": "color",
+          "$value": "{semantic.color.border.neutral.base}",
+          "$description": "",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{semantic.color.surface.brand.bold}",
+          "$description": "",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "focus": {
+          "$type": "color",
+          "$value": "{semantic.color.border.brand.bold}",
+          "$description": "",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "error": {
+          "default": {
+            "$type": "color",
+            "$value": "{semantic.color.border.feedback.danger.base}",
+            "$description": "",
+            "$extensions": {
+              "mode": {}
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{semantic.color.border.feedback.danger.bold}",
+            "$description": "",
+            "$extensions": {
+              "mode": {}
+            }
+          }
+        },
+        "disabled": {
+          "$type": "dimension",
+          "$value": "{semantic.effect.opacity.md}",
+          "$description": "",
+          "$extensions": {
+            "mode": {}
+          }
+        }
+      },
+      "label": {
+        "$type": "color",
+        "$value": "{semantic.color.text.neutral.subtle}",
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        },
+        "error": {
+          "$type": "color",
+          "$value": "{semantic.color.text.feedback.danger.base}",
+          "$description": "",
+          "$extensions": {
+            "mode": {}
+          }
+        }
+      }
+    },
+    "$extensions": {
+      "tokens-bruecke-meta": {
+        "useDTCG": true,
+        "spec": "https://www.designtokens.org/tr/2025.10/format/",
+        "colorMode": "hex",
+        "variableCollections": [
+          "primitives",
+          "semantic",
+          "component"
+        ],
+        "createdAt": "2026-09-12T23:15:08.371Z"
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+@import url("./tokens/generated.css");
+@import url("./foundations/reset.css");
+@import url("./foundations/typography.css");
+@import url("./foundations/icons.css");
+@import url("../assets/remixicon/remixicon.css");
+@import url("./components/index.css");

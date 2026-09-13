@@ -1,0 +1,10 @@
+/* ds-screen-footer — единый футер экранов и drawer */
+.ds-screen-footer {
+  flex-shrink: 0;
+  margin-block-start: auto;
+  padding: var(--semantic-layout-padding-lg);
+  padding-bottom: calc(var(--semantic-layout-padding-lg) + env(safe-area-inset-bottom, 0));
+  border-top: 1px solid var(--semantic-color-border-neutral-base);
+  background-color: var(--semantic-color-surface-neutral-base);
+}
+

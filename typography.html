@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Garage — Typography</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="design-system/index.css" />
+    <style>
+      body {
+        padding: var(--semantic-layout-padding-xl);
+        padding-bottom: var(--semantic-layout-padding-2xl);
+        max-width: 720px;
+        margin: 0 auto;
+      }
+
+      .page-header {
+        margin-bottom: var(--semantic-layout-padding-2xl);
+      }
+
+      .page-header p {
+        margin: var(--semantic-layout-gap-md) 0 0;
+        color: var(--semantic-color-text-neutral-muted);
+      }
+
+      .type-section {
+        margin-bottom: var(--semantic-layout-padding-2xl);
+      }
+
+      .type-section__heading {
+        margin-bottom: var(--semantic-layout-padding-lg);
+        padding-bottom: var(--semantic-layout-gap-md);
+        border-bottom: 1px solid var(--semantic-color-surface-neutral-bold);
+        color: var(--semantic-color-text-neutral-base);
+      }
+
+      .type-card {
+        display: flex;
+        flex-direction: column;
+        gap: var(--semantic-layout-gap-md);
+        padding: var(--semantic-layout-padding-lg);
+        border: 1px solid var(--semantic-color-surface-neutral-bold);
+        border-radius: var(--semantic-layout-radius-md);
+        background: var(--semantic-color-surface-neutral-base);
+      }
+
+      .type-card + .type-card {
+        margin-top: var(--semantic-layout-gap-lg);
+      }
+
+      .type-card__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--semantic-layout-gap-sm) var(--semantic-layout-gap-lg);
+        font-size: var(--semantic-typography-caption-font-size-xs);
+        line-height: var(--semantic-typography-caption-line-height-xs);
+        color: var(--semantic-color-text-neutral-muted);
+      }
+
+      .type-card__meta code {
+        font-family: ui-monospace, "Cascadia Code", "Segoe UI Mono", monospace;
+        font-size: 11px;
+        padding: 2px 6px;
+        border-radius: var(--semantic-layout-radius-sm);
+        background: var(--semantic-color-surface-neutral-subtle);
+        color: var(--semantic-color-text-neutral-subtle);
+      }
+
+      .type-card__sample {
+        word-break: break-word;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="page-header">
+      <h1 class="ds-text-title-lg">Typography</h1>
+      <p class="ds-text-body-sm">
+        Inter · semantic tokens · классы <code>ds-text-*</code>
+      </p>
+    </header>
+
+    <section class="type-section" aria-labelledby="section-title">
+      <h2 class="ds-text-body-md type-section__heading" id="section-title">Title</h2>
+
+      <article class="type-card">
+        <p class="ds-text-caption-xs type-card__meta">
+          <span><code>.ds-text-title-lg</code></span>
+          <span>18px / 26px · 600</span>
+          <span><code>--semantic-typography-title-font-size-lg</code></span>
+        </p>
+        <p class="ds-text-title-lg type-card__sample">Журнал обслуживания</p>
+      </article>
+    </section>
+
+    <section class="type-section" aria-labelledby="section-body">
+      <h2 class="ds-text-body-md type-section__heading" id="section-body">Body</h2>
+
+      <article class="type-card">
+        <p class="ds-text-caption-xs type-card__meta">
+          <span><code>.ds-text-body-md</code></span>
+          <span>16px / 24px · 500</span>
+          <span><code>--semantic-typography-body-font-size-md</code></span>
+        </p>
+        <p class="ds-text-body-md type-card__sample">
+          Запись о замене масла и фильтров. Пробег 85 000 км, сервисная станция на Ленинском.
+        </p>
+      </article>
+
+      <article class="type-card">
+        <p class="ds-text-caption-xs type-card__meta">
+          <span><code>.ds-text-body-sm</code></span>
+          <span>14px / 20px · 500</span>
+          <span><code>--semantic-typography-body-font-size-sm</code></span>
+        </p>
+        <p class="ds-text-body-sm type-card__sample">
+          Добавьте первую запись об обслуживании вашего автомобиля.
+        </p>
+      </article>
+    </section>
+
+    <section class="type-section" aria-labelledby="section-label">
+      <h2 class="ds-text-body-md type-section__heading" id="section-label">Label</h2>
+
+      <article class="type-card">
+        <p class="ds-text-caption-xs type-card__meta">
+          <span><code>.ds-text-label-md</code></span>
+          <span>16px / 24px · 500</span>
+          <span><code>--semantic-typography-label-font-size-md</code></span>
+        </p>
+        <p class="ds-text-label-md type-card__sample">Марка автомобиля</p>
+      </article>
+    </section>
+
+    <section class="type-section" aria-labelledby="section-caption">
+      <h2 class="ds-text-body-md type-section__heading" id="section-caption">Caption</h2>
+
+      <article class="type-card">
+        <p class="ds-text-caption-xs type-card__meta">
+          <span><code>.ds-text-caption-xs</code></span>
+          <span>12px / 16px · 500</span>
+          <span><code>--semantic-typography-caption-font-size-xs</code></span>
+        </p>
+        <p class="ds-text-caption-xs type-card__sample">
+          Необязательное поле · обновлено 12.09.2026
+        </p>
+      </article>
+    </section>
+  </body>
+</html>

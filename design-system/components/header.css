@@ -1,0 +1,51 @@
+/* ds-header — avatar или back + заголовок + подзаголовок */
+.ds-header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--semantic-layout-gap-md);
+  padding-block: var(--semantic-layout-padding-lg);
+  padding-inline: var(--semantic-layout-padding-xl);
+  background-color: var(--semantic-color-background-base);
+}
+
+.ds-header__lead {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--semantic-layout-radius-md);
+  background-color: var(--semantic-color-surface-neutral-base);
+}
+
+.ds-header[data-variant="avatar"] .ds-header__lead > .ds-icon {
+  color: var(--semantic-color-icon-neutral-base);
+}
+
+.ds-header[data-variant="back"] .ds-header__lead {
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.ds-header__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.ds-header__title {
+  margin: 0;
+  color: var(--semantic-color-text-neutral-base);
+  font-weight: var(--semantic-typography-title-font-weight);
+  font-size: var(--semantic-typography-title-font-size-lg);
+  line-height: var(--semantic-typography-title-line-height-lg);
+}
+
+.ds-header__subtitle {
+  margin: var(--semantic-layout-gap-sm) 0 0;
+  color: var(--semantic-color-text-neutral-muted);
+  font-size: var(--semantic-typography-body-font-size-sm);
+  line-height: var(--semantic-typography-body-line-height-sm);
+}
