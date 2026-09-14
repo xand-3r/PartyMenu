@@ -25,8 +25,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
-          # Если design-system станет private — добавьте secret DS_REPO_TOKEN и раскомментируйте:
-          # token: ${{ secrets.DS_REPO_TOKEN }}
+          token: ${{ secrets.DS_REPO_TOKEN }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

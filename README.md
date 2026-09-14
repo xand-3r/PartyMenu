@@ -49,7 +49,14 @@ node scripts/serve.mjs
 3. Workflow `.github/workflows/deploy-pages.yml` деплоит app + submodule.
 4. URL: `https://xand-3r.github.io/mini-garage/`
 
-Если `design-system` станет **private**, добавьте secret `DS_REPO_TOKEN` (PAT с read-доступом) и раскомментируйте `token` в workflow.
+Репозиторий `design-system` **private** — в mini-garage нужен secret **`DS_REPO_TOKEN`**:
+
+1. GitHub → **Settings** → **Developer settings** → **Fine-grained tokens** → **Generate**
+2. Repository access: только `design-system`
+3. Permissions: **Contents → Read-only**
+4. Скопируйте токен → mini-garage → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**
+5. Name: `DS_REPO_TOKEN`, Value: вставьте токен
+6. **Actions** → **Deploy GitHub Pages** → **Run workflow**
 
 ## Привязка к боту
 
