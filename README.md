@@ -7,42 +7,49 @@ Telegram Mini App — журнал обслуживания автомобиля
 
 ## Стек (волна 1)
 
-- HTML + **design-system/** (порт [shadcn-css](https://github.com/BadreddineIbril/shadcn-css)) + Vanilla JS
-- Иконки: [Remix Icon](https://github.com/Remix-Design/RemixIcon) (`assets/remixicon/`)
+- HTML + **design system** (git submodule) + Vanilla JS
 - localStorage
 - [Telegram Web App SDK](https://telegram.org/js/telegram-web-app.js)
-- GitHub Pages
+- GitHub Pages (GitHub Actions)
 
 ## Design System
 
-См. `design-system/README.md` — компоненты `ds-*`, **DTCG токены** (`design-system/tokens/*.tokens.json`).
+UI kit в отдельном репозитории: [xand-3r/design-system](https://github.com/xand-3r/design-system)
 
-После изменения токенов: `node scripts/build-tokens.mjs`
+Подключён как submodule: `vendor/ds/`
 
-Галерея компонентов: `showcase.html`
+```bash
+git submodule update --init --recursive
+```
+
+- CSS: `vendor/ds/design-system/index.css`
+- JS: `vendor/ds/js/design-system/index.js`
+- Showcase: в репозитории design-system (`showcase.html`)
 
 ## Локальный просмотр
 
 ```bash
+git submodule update --init --recursive
 node scripts/serve.mjs
 ```
 
 Сервер отдаёт файлы **без кэша** (актуальные токены и CSS).
 
 - App: http://localhost:8080
-- Showcase: http://localhost:8080/showcase.html
 - Typography: http://localhost:8080/typography.html
 
-**На телефоне (та же Wi‑Fi):** после запуска сервер выведет LAN-адрес, например `http://192.168.x.x:8080/`. IP у каждого компьютера свой — смотрите вывод `node scripts/serve.mjs` или `ipconfig`.
+**На телефоне (та же Wi‑Fi):** после запуска сервер выведет LAN-адрес, например `http://192.168.x.x:8080/`.
 
-Если порт 8080 занят старым процессом: `$env:PORT=8081; node scripts/serve.mjs`
+Если порт 8080 занят: `$env:PORT=8081; node scripts/serve.mjs`
 
 ## Деплой на GitHub Pages
 
-1. Закоммитьте и запушьте код в `main`.
-2. GitHub → **Settings** → **Pages**.
-3. Source: **Deploy from branch** → `main` → `/ (root)` → Save.
+1. Закоммитьте и запушьте код в `main` (вместе с submodule).
+2. GitHub → **Settings** → **Pages** → Source: **GitHub Actions**.
+3. Workflow `.github/workflows/deploy-pages.yml` деплоит app + submodule.
 4. URL: `https://xand-3r.github.io/mini-garage/`
+
+Если `design-system` станет **private**, добавьте secret `DS_REPO_TOKEN` (PAT с read-доступом) и раскомментируйте `token` в workflow.
 
 ## Привязка к боту
 
@@ -53,9 +60,11 @@ node scripts/serve.mjs
 ## Структура
 
 ```
-index.html      — Mini App
-css/            — стили
+index.html          — Mini App
+vendor/ds/          — design system (submodule)
+css/                — стили приложения
 js/
-  storage.js    — localStorage
-  app.js        — UI и логика
+  storage.js        — localStorage
+  app.js            — UI и логика
+scripts/serve.mjs   — dev server
 ```

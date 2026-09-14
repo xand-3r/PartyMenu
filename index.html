@@ -13,7 +13,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="design-system/index.css" />
+    <link rel="stylesheet" href="vendor/ds/design-system/index.css" />
     <link rel="stylesheet" href="css/app.css" />
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
   </head>
@@ -22,12 +22,14 @@
       <!-- Стартовый экран: нет автомобиля -->
       <section id="screen-welcome" class="screen screen--welcome hidden" aria-label="Добавление автомобиля">
         <div class="screen-body screen-body--center">
-          <div class="ds-empty">
-            <div class="ds-empty__icon" aria-hidden="true">
-              <i class="ds-icon ds-icon--lg ri-car-fill"></i>
-            </div>
-            <h1 class="ds-empty__title">Добро пожаловать в Mini Garage!</h1>
-            <p class="ds-empty__text">Добавьте машину - и можно вести журнал обслуживания</p>
+          <div
+            class="ds-empty"
+            data-ds-empty
+            data-title="Добро пожаловать в Mini Garage!"
+            data-description="Добавьте машину - и можно вести журнал обслуживания"
+            data-icon="car-fill"
+            data-heading="1"
+          >
             <div class="ds-empty__action">
               <button
                 type="button"
@@ -147,13 +149,14 @@
         </header>
 
         <main class="main">
-          <div id="empty-state" class="ds-empty hidden">
-            <div class="ds-empty__icon" aria-hidden="true">
-              <i class="ds-icon ds-icon--lg ri-folder-5-fill"></i>
-            </div>
-            <h2 class="ds-empty__title">Пока нет записей</h2>
-            <p class="ds-empty__text">Добавьте первую запись об обслуживании</p>
-          </div>
+          <div
+            id="empty-state"
+            class="ds-empty hidden"
+            data-ds-empty
+            data-title="Пока нет записей"
+            data-description="Добавьте первую запись об обслуживании"
+            data-icon="folder-5-fill"
+          ></div>
 
           <div id="log-list" class="ds-item-group" aria-live="polite"></div>
         </main>

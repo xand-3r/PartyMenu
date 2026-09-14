@@ -1,0 +1,3 @@
+[submodule "vendor/ds"]
+	path = vendor/ds
+	url = https://github.com/xand-3r/design-system.git

@@ -6,7 +6,7 @@ import {
   loadVehicle,
   saveVehicle,
 } from "./storage.js";
-import { initDesignSystem } from "./design-system/index.js";
+import { initDesignSystem } from "../vendor/ds/js/design-system/index.js";
 import { ICONS, iconHtml } from "./icons.js";
 import { applyTelegramChrome } from "./theme.js";
 
