@@ -1,0 +1,20 @@
+/**
+ * Party Menu — бренд #FE269C поверх DS dark theme (нейтрали из themes/dark.css).
+ */
+html[data-ds-theme="dark"] {
+  --semantic-color-text-brand-base: #fe269c;
+  --semantic-color-surface-brand-base: #fe269c;
+  --semantic-color-surface-brand-bold: #e0228d;
+  --semantic-color-icon-brand-base: #fe269c;
+  --semantic-color-border-brand-base: #fe269c;
+  --semantic-color-border-brand-bold: #e0228d;
+  --semantic-effect-focus-ring-brand-base: rgb(254 38 156 / 0.45);
+
+  --component-button-primary-surface-default: #fe269c;
+  --component-button-primary-surface-hover: #e0228d;
+  --component-button-primary-surface-focus: #fe269c;
+
+  --component-input-border-focus: #fe269c;
+  --component-textarea-border-focus: #fe269c;
+  --component-item-icon-brand: #fe269c;
+}

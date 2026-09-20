@@ -5,6 +5,13 @@ export function token(name) {
 
 /** Синхронизирует шапку Telegram Mini App с DTCG токенами */
 export function applyTelegramChrome() {
+  const surface = token("--semantic-color-surface-neutral-base") || "#ffffff";
+
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  if (themeMeta instanceof HTMLMetaElement) {
+    themeMeta.content = surface;
+  }
+
   const tg = window.Telegram?.WebApp;
   if (!tg) return;
 
@@ -12,7 +19,6 @@ export function applyTelegramChrome() {
   tg.expand();
 
   const bg = token("--semantic-color-background-base");
-  const surface = token("--semantic-color-surface-neutral-base");
 
   if (bg && tg.setBackgroundColor) tg.setBackgroundColor(bg);
   if (surface && tg.setHeaderColor) tg.setHeaderColor(surface);

@@ -1,11 +1,8 @@
-# Mini Garage
+# Party Menu
 
-Telegram Mini App — журнал обслуживания автомобиля.
+Telegram Mini App — выбор меню на праздник (салат, горячее, напиток, имя) и добавление события в календарь.
 
-**План и лог проекта** — в отдельном репозитории:  
-`household-knowledge-base/notes/mini-garage/plan.md`
-
-## Стек (волна 1)
+## Стек
 
 - HTML + **design system** (git submodule) + Vanilla JS
 - localStorage
@@ -14,7 +11,7 @@ Telegram Mini App — журнал обслуживания автомобиля
 
 ## Design System
 
-UI kit в отдельном репозитории: [xand-3r/design-system](https://github.com/xand-3r/design-system)
+UI kit: [xand-3r/design-system](https://github.com/xand-3r/design-system)
 
 Подключён как submodule: `vendor/ds/`
 
@@ -22,9 +19,7 @@ UI kit в отдельном репозитории: [xand-3r/design-system](htt
 git submodule update --init --recursive
 ```
 
-- CSS: `vendor/ds/design-system/index.css`
-- JS: `vendor/ds/js/design-system/index.js`
-- Showcase: в репозитории design-system (`showcase.html`)
+Локально, если submodule ещё не инициализирован, dev-сервер подхватывает соседний клон `../design-system` (или путь из `DS_ROOT`).
 
 ## Локальный просмотр
 
@@ -33,45 +28,43 @@ git submodule update --init --recursive
 node scripts/serve.mjs
 ```
 
-Сервер отдаёт файлы **без кэша** (актуальные токены и CSS).
+- App: http://localhost:8080/
 
-- App: http://localhost:8080
-- Typography: http://localhost:8080/typography.html
+Другой путь к design-system:
 
-**На телефоне (та же Wi‑Fi):** после запуска сервер выведет LAN-адрес, например `http://192.168.x.x:8080/`.
+```powershell
+$env:DS_ROOT="E:\git\design-system"; node scripts/serve.mjs
+```
 
-Если порт 8080 занят: `$env:PORT=8081; node scripts/serve.mjs`
+## Экраны
 
-## Деплой на GitHub Pages
+1. **Главная** — фото приглашения (`assets/images/`, последний по имени) и кнопка «Я пойду»
+2. **Шаг 1** — салат (`ds-item` radio)
+3. **Шаг 2** — горячее
+4. **Шаг 3** — напиток
+5. **Шаг 4** — имя
+6. **Успех** — то же фото + «Добавить в календарь» (файл `.ics`)
 
-1. Закоммитьте и запушьте код в `main` (вместе с submodule).
-2. GitHub → **Settings** → **Pages** → Source: **GitHub Actions**.
-3. Workflow `.github/workflows/deploy-pages.yml` деплоит app + submodule.
-4. URL: `https://xand-3r.github.io/mini-garage/`
+## Отправка формы в Telegram
 
-Репозиторий `design-system` **private** — в mini-garage нужен secret **`DS_REPO_TOKEN`**:
+Сайт для гостей по **SMS** (не Mini App): backend + `apiUrl` и `apiSubmitKey` в `js/config.js`. Локальный тест: `node scripts/telegram-submit-server.mjs`. Подробно: [docs/telegram-submit.md](docs/telegram-submit.md).
 
-1. GitHub → **Settings** → **Developer settings** → **Fine-grained tokens** → **Generate**
-2. Repository access: только `design-system`
-3. Permissions: **Contents → Read-only**
-4. Скопируйте токен → mini-garage → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**
-5. Name: `DS_REPO_TOKEN`, Value: вставьте токен
-6. **Actions** → **Deploy GitHub Pages** → **Run workflow**
+## Деплой
 
-## Привязка к боту
-
-1. **@BotFather** → ваш бот.
-2. `/setmenubutton` → текст: **Журнал**.
-3. URL: `https://xand-3r.github.io/mini-garage/`
+Как в Mini Garage: workflow `.github/workflows/deploy-pages.yml`, secret `DS_REPO_TOKEN` для private submodule.
 
 ## Структура
 
 ```
-index.html          — Mini App
+index.html
+assets/images/      — приглашение и другие фото
 vendor/ds/          — design system (submodule)
-css/                — стили приложения
+css/app.css
 js/
-  storage.js        — localStorage
-  app.js            — UI и логика
-scripts/serve.mjs   — dev server
+  app.js
+  menu-data.js
+  storage.js
+  calendar.js
+  photos.js
+scripts/serve.mjs
 ```

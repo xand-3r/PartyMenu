@@ -1,17 +1,16 @@
 ﻿.app {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
+  position: relative;
   max-width: 480px;
   margin: 0 auto;
   background: var(--semantic-color-background-base);
 }
 
+.app[data-dish-detail-open="true"] .screen-body {
+  overflow: hidden;
+}
+
 .screen {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-height: 100dvh;
+  background: var(--semantic-color-background-base);
 }
 
 .screen.hidden {
@@ -19,44 +18,155 @@
 }
 
 .screen-body {
-  flex: 1;
   padding: var(--semantic-layout-padding-lg);
-  overflow-y: auto;
-}
-
-.screen-body--center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.screen--welcome .screen-body {
   background: var(--semantic-color-surface-neutral-base);
 }
 
-.screen--journal,
-.screen--add-car,
-.screen--add-log,
-.screen--log-detail {
+/* Hero — картинка на весь экран, кнопка поверх снизу */
+.screen--hero {
+  position: relative;
+  padding: 0;
+  flex: 1 1 auto;
+  min-height: 0;
   background: var(--semantic-color-background-base);
 }
 
-.screen--journal .main,
-.screen--add-car .screen-body,
-.screen--add-log .screen-body,
-.screen--log-detail .screen-body {
-  flex: 1;
-  padding: var(--semantic-layout-margin-xl);
-  overflow-y: auto;
-  background: var(--semantic-color-surface-neutral-base);
-  border-start-start-radius: var(--semantic-layout-radius-3xl);
-  border-start-end-radius: var(--semantic-layout-radius-3xl);
+.ds-app-viewport .screen--hero .screen-body.screen-body--hero {
+  position: absolute;
+  inset: 0;
+  flex: none;
+  padding: 0 !important;
+  overflow: hidden;
+  overflow-y: hidden;
+  background: var(--semantic-color-background-base);
 }
 
-.main:has(#empty-state:not(.hidden)) {
+.hero-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  background: var(--semantic-color-background-base);
+}
+
+.screen--hero .ds-screen-footer[data-variant="ghost"][data-overlay="true"],
+.screen--hero .ds-screen-footer[data-variant="solid"],
+.screen--hero .ds-screen-footer[data-variant="solid-dual"] {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  margin-block-start: 0;
+  z-index: 3;
+}
+
+.screen--hero .ds-screen-footer[data-variant="solid"],
+.screen--hero .ds-screen-footer[data-variant="solid-dual"] {
+  background-color: var(--semantic-color-surface-neutral-base);
+  border-start-start-radius: var(--component-screen-footer-radius-top, var(--semantic-layout-radius-lg));
+  border-start-end-radius: var(--component-screen-footer-radius-top, var(--semantic-layout-radius-lg));
+}
+
+/* Форма меню — как journal / add-log в Mini Garage */
+.screen--form {
+  gap: var(--semantic-layout-gap-sm);
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.screen--form .ds-header {
+  flex-shrink: 0;
+}
+
+.screen--form .screen-body {
+  margin: 0;
+  padding: var(--semantic-layout-margin-xl);
+  background: var(--semantic-color-surface-neutral-base);
+  border-start-start-radius: var(--semantic-layout-radius-lg);
+  border-start-end-radius: var(--semantic-layout-radius-lg);
+  border-end-start-radius: var(--semantic-layout-radius-lg);
+  border-end-end-radius: var(--semantic-layout-radius-lg);
+}
+
+.form-step__name-form .ds-field {
+  margin: 0;
+}
+
+/* Детали блюда — ds-drawer внутри .app, не на весь viewport */
+.app .dish-detail-root.ds-drawer-root {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  max-height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.app .dish-detail-root.ds-drawer-root[data-state="open"] {
+  pointer-events: auto;
+}
+
+.app .dish-detail-root .ds-drawer-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.app .dish-detail-root .ds-drawer-content.dish-detail[data-direction="bottom"] {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  max-height: min(90%, 100%);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  border-block-start: none;
+}
+
+.app .dish-detail-root .ds-drawer-content.dish-detail .ds-drawer-handle {
+  display: none;
+}
+
+.app .dish-detail-root[data-state="open"] .ds-drawer-content[data-direction="bottom"] {
+  transform: translateY(0);
+}
+
+.dish-detail.ds-drawer-content[data-direction="bottom"] .ds-drawer-header.dish-detail__header {
+  flex-direction: row;
+  justify-content: flex-end;
+  text-align: unset;
+  padding-block: var(--semantic-layout-padding-lg);
+  padding-inline: var(--semantic-layout-padding-lg);
+}
+
+.dish-detail__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--semantic-layout-gap-md);
+  min-height: 0;
+  padding-top: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.dish-detail__photo {
+  display: block;
+  width: 100%;
+  height: 456px;
+  border-radius: var(--semantic-layout-radius-lg);
+  object-fit: cover;
+  object-position: center;
+  background-color: var(--component-item-media-surface);
+  flex-shrink: 0;
+}
+
+.ds-item__media[data-variant="photo"] {
+  cursor: pointer;
+}
+
+.dish-detail__title {
+  text-align: start;
+}
+
+.dish-detail__description {
+  text-align: start;
 }
