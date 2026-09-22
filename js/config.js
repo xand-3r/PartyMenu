@@ -8,8 +8,8 @@
  */
 export const TELEGRAM_SUBMIT = {
   /** POST endpoint вашего backend (Cloudflare Worker, VPS, scripts/telegram-submit-server.mjs) */
-  apiUrl: "",
+  apiUrl: "https://holy-cherry-faca.lxpvpaeoo.workers.dev/submit",
   /** Общий секрет в заголовке X-Submit-Key (для сайта без Telegram initData) */
-  apiSubmitKey: "",
+  apiSubmitKey: "3dTryCblEpLZBsxI9XDgt8cPonAviOqf1uVGM0K2",
   useSendData: false,
 };
