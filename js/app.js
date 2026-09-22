@@ -7,6 +7,7 @@ import { HOME_PHOTO, SUCCESS_PHOTO } from "./photos.js";
 import { applyTelegramChrome } from "./theme.js";
 import { submitOrderToTelegram } from "./telegram-submit.js";
 import { bindDishDetailPanel, initDishDetailDrawer } from "./dish-detail.js";
+import { showToast } from "./toast.js";
 
 const tg = window.Telegram?.WebApp;
 const SUBMIT_SESSION_KEY = "party-menu-telegram-submitted";
@@ -121,6 +122,15 @@ function renderRadioStep(stepKey, options, selectedId) {
   `;
 
   initDesignSystem(formStepPanel);
+
+  if (!selectedId) {
+    const group = formStepPanel.querySelector("[data-ds-item-radio-group]");
+    group?.querySelectorAll('.ds-item[data-variant="radio"]').forEach((item) => {
+      if (!(item instanceof HTMLElement)) return;
+      item.setAttribute("aria-checked", "false");
+      item.dataset.selected = "false";
+    });
+  }
 }
 
 function renderNameStep(name) {
@@ -136,7 +146,6 @@ function renderNameStep(name) {
           autocomplete="name"
           value="${escapeHtml(name)}"
         />
-        <p class="ds-field-error" data-field-error hidden>Укажите имя</p>
       </div>
     </form>
   `;
@@ -149,13 +158,10 @@ function setNameFieldError(hasError) {
   const field = formStepPanel.querySelector('[data-field="name"]');
   if (!(field instanceof HTMLElement)) return;
   const input = field.querySelector(".ds-input");
-  const errorEl = field.querySelector("[data-field-error]");
   field.dataset.invalid = hasError ? "true" : "false";
   if (input instanceof HTMLInputElement) {
-    input.toggleAttribute("aria-invalid", hasError);
-  }
-  if (errorEl instanceof HTMLElement) {
-    errorEl.hidden = !hasError;
+    if (hasError) input.setAttribute("aria-invalid", "true");
+    else input.removeAttribute("aria-invalid");
   }
 }
 
@@ -184,7 +190,11 @@ function validateCurrentStep() {
     const name = input instanceof HTMLInputElement ? input.value.trim() : "";
     const valid = name.length > 0;
     setNameFieldError(!valid);
-    if (!valid) return null;
+    if (!valid) {
+      tg?.HapticFeedback?.notificationOccurred("error");
+      showToast("Нужно указать имя");
+      return null;
+    }
     return { name };
   }
 
@@ -192,6 +202,12 @@ function validateCurrentStep() {
   const value = getSelectedRadioValue(group);
   if (!value) {
     tg?.HapticFeedback?.notificationOccurred("error");
+    const toastByStep = {
+      salad: "Нужно выбрать салат",
+      main: "Нужно выбрать горячее",
+      drink: "Нужно выбрать напиток",
+    };
+    showToast(toastByStep[config.key] ?? "Нужно выбрать блюдо");
     return null;
   }
   return { [config.key]: value };
@@ -271,7 +287,11 @@ function initApp() {
   showScreen("home");
 }
 
-btnHomeStart?.addEventListener("click", () => openFormAt(0));
+btnHomeStart?.addEventListener("click", () => {
+  sessionStorage.removeItem(SUBMIT_SESSION_KEY);
+  saveOrder({});
+  openFormAt(0);
+});
 btnFormBack?.addEventListener("click", goBack);
 btnFormNext?.addEventListener("click", goNext);
 btnAddCalendar?.addEventListener("click", () => {

@@ -46,22 +46,28 @@ export function readDishFromItem(item) {
 export function bindDishDetailPanel(panelEl) {
   if (!(panelEl instanceof HTMLElement)) return;
 
-  panelEl.addEventListener("click", (event) => {
-    const target = event.target;
-    if (!(target instanceof Element)) return;
-    const media = target.closest('.ds-item__media[data-variant="photo"]');
-    if (!(media instanceof HTMLElement)) return;
+  // Capture: до click-хендлера radio на .ds-item, иначе фото и открывает drawer, и выбирает пункт
+  panelEl.addEventListener(
+    "click",
+    (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const media = target.closest('.ds-item__media[data-variant="photo"]');
+      if (!(media instanceof HTMLElement)) return;
 
-    const item = media.closest('.ds-item--select[data-variant="radio"]');
-    if (!(item instanceof HTMLElement)) return;
+      const item = media.closest('.ds-item--select[data-variant="radio"]');
+      if (!(item instanceof HTMLElement)) return;
 
-    event.preventDefault();
-    event.stopPropagation();
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
 
-    const dish = readDishFromItem(item);
-    if (!dish.title || !dish.detailImage) return;
-    openDishDetail(dish);
-  });
+      const dish = readDishFromItem(item);
+      if (!dish.title || !dish.detailImage) return;
+      openDishDetail(dish);
+    },
+    true
+  );
 }
 
 export function initDishDetailDrawer() {
