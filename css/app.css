@@ -22,15 +22,7 @@
   background: var(--semantic-color-surface-neutral-base);
 }
 
-/*
- * Hero — колонка: фото занимает оставшуюся высоту над футером.
- * Адаптируется под 100dvh / Telegram viewport; низ приглашения (16:00) не уезжает под кнопку.
- */
-.ds-app-viewport .app {
-  height: var(--tg-viewport-stable-height, 100dvh);
-  max-height: var(--tg-viewport-stable-height, 100dvh);
-}
-
+/* Hero — full-bleed фото, футер поверх; кадр сдвинут вверх на 20px (видно 16:00) */
 .screen--hero {
   position: relative;
   padding: 0;
@@ -40,10 +32,9 @@
 }
 
 .ds-app-viewport .screen--hero .screen-body.screen-body--hero {
-  position: relative;
-  inset: auto;
-  flex: 1 1 auto;
-  min-height: 0;
+  position: absolute;
+  inset: 0;
+  flex: none;
   padding: 0 !important;
   overflow: hidden;
   overflow-y: hidden;
@@ -53,20 +44,25 @@
 .hero-photo {
   display: block;
   width: 100%;
-  height: 100%;
+  height: calc(100% + 20px);
   object-fit: cover;
-  /* При низкой высоте (Telegram chrome) сохраняем низ карточки с временем */
-  object-position: center bottom;
+  object-position: center center;
+  transform: translateY(-20px);
   background: var(--semantic-color-background-base);
+}
+
+.screen--hero .ds-screen-footer[data-variant="ghost"][data-overlay="true"],
+.screen--hero .ds-screen-footer[data-variant="solid"],
+.screen--hero .ds-screen-footer[data-variant="solid-dual"] {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  margin-block-start: 0;
+  z-index: 3;
 }
 
 .screen--hero .ds-screen-footer[data-variant="solid"],
 .screen--hero .ds-screen-footer[data-variant="solid-dual"] {
-  position: relative;
-  inset: auto;
-  flex-shrink: 0;
-  margin-block-start: 0;
-  z-index: 3;
   background-color: var(--semantic-color-surface-neutral-base);
   border-start-start-radius: var(--component-screen-footer-radius-top, var(--semantic-layout-radius-lg));
   border-start-end-radius: var(--component-screen-footer-radius-top, var(--semantic-layout-radius-lg));
