@@ -27,6 +27,9 @@ jobs:
           submodules: recursive
           token: ${{ secrets.DS_REPO_TOKEN }}
 
+      - name: Stamp asset versions (cache bust)
+        run: node scripts/stamp-cache-bust.mjs "${{ github.sha }}"
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
